@@ -52,6 +52,49 @@ st.markdown("[Streamlit](https://streamlit.io/) :guardsman:")
 st.markdown("| Nombre | Edad |\n| --- | --- |\n| Hugo | 30 |\n| Maria | 25 |")
 
 
+# Latex
+st.latex(r"""
+\begin{equation}
+E = mc^2
+\end{equation}
+""")
+
+st.latex("E = mc^2")
+# matrices
+st.latex(r"""
+\begin{bmatrix}
+1 & 2 & 3 \\
+4 & 5 & 6 \\
+7 & 8 & 9
+\end{bmatrix}
+""")
+
+# json
+st.json({
+    "nombre": "Hugo",
+    "apellido": "Martinez",
+    "edad": 30,
+    "lenguajes": ["Python", "JavaScript", "C++"],
+    "activo": True,
+    "direccion": {
+        "calle": "123 Main St",
+        "ciudad": "Ciudad",
+        "pais": "Pais"
+    }
+})  
+
+code = """
+# Ejemplo de código en Python
+def saludar(nombre):
+    return f"Hola, {nombre}!"   
+"""
+st.code(code, language='python')
+
+# write
+st.write("Este es un texto escrito con `st.write()`")
+
+
+
 
 import streamlit as st
 import matplotlib.pyplot as plt
@@ -85,6 +128,84 @@ if st.session_state.mostrar_grafica:
     st.pyplot(fig)
 
 
+# Metricas
+st.metric(label="Temperatura", value="25 °C", delta="1 °C")
+st.metric(label="Velocidad", value="120 km/h", delta="-5 km/h")
+
+col1, col2 = st.columns(2)
+
+with col1:
+    st.metric(label="Temperatura", value="25 °C", delta="1 °C")
+
+with col2:
+    st.metric(label="Velocidad", value="120 km/h", delta="-5 km/h")
+
+# Barra de progreso
+st.progress(50)  # Progreso al 50%
+# Contador
+if "contador" not in st.session_state:
+    st.session_state.contador = 0
+if st.button("Incrementar contador"):
+    st.session_state.contador += 1
+st.write(f"Contador: {st.session_state.contador}")
+# Selección de opciones
+opcion = st.selectbox("Selecciona una opción", ["Opción 1", "Opción 2", "Opción 3"])
+st.write(f"Opción seleccionada: {opcion}")
+# Casillas de verificación
+checkbox = st.checkbox("Marcar esta casilla")
+st.write(f"Casilla marcada: {checkbox}")
+# Radio buttons
+radio = st.radio("Selecciona una opción", ["Opción A", "Opción B", "Opción C"])
+st.write(f"Opción seleccionada: {radio}")
+# Desplegables
+desplegable = st.selectbox("Selecciona un elemento", ["Elemento 1", "Elemento 2", "Elemento 3"])
+st.write(f"Elemento seleccionado: {desplegable}")
+# Entradas de texto
+texto = st.text_input("Ingresa un texto")
+st.write(f"Texto ingresado: {texto}")
+# Entradas de contraseña
+contrasena = st.text_input("Ingresa una contraseña", type="password")
+st.write(f"Contraseña ingresada: {contrasena}")
+# Entradas de número
+numero = st.number_input("Ingresa un número", min_value=0, max_value=100, value=50)
+st.write(f"Número ingresado: {numero}")
+# Entradas de fecha
+fecha = st.date_input("Selecciona una fecha")
+st.write(f"Fecha seleccionada: {fecha}")
+# Entradas de hora
+hora = st.time_input("Selecciona una hora")
+st.write(f"Hora seleccionada: {hora}")
+# Entradas de archivo
+archivo = st.file_uploader("Sube un archivo", type=["txt", "csv", "xlsx"])
+if archivo is not None:
+    st.write(f"Archivo subido: {archivo.name}")
+    # Mostrar el contenido del archivo si es un texto
+    if archivo.type == "text/plain":
+        contenido = archivo.read().decode("utf-8")
+        st.text_area("Contenido del archivo", value=contenido, height=300)
+    elif archivo.type == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
+        import pandas as pd
+        df = pd.read_excel(archivo)
+        st.dataframe(df)
+# Botones
+if st.button("Botón de acción"):
+    st.success("¡Botón presionado!")
+# Mostrar un mensaje de éxito
+st.success("¡Todo ha ido bien!")
+# Mostrar un mensaje de error
+st.error("¡Ha ocurrido un error!")
+# Mostrar un mensaje de advertencia
+st.warning("¡Cuidado! Esto es una advertencia.")
+# Mostrar un mensaje de información
+st.info("¡Esto es información importante!")
+# Mostrar un mensaje de éxito
+st.success("¡Operación exitosa!")
+# Mostrar un mensaje de error
+st.error("¡Ha ocurrido un error!")
+# Mostrar un mensaje de advertencia
+st.warning("¡Cuidado! Esto es una advertencia.")
+# Mostrar un mensaje de información
+st.info("¡Esto es información importante!") 
 
 
 
