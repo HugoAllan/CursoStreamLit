@@ -1,16 +1,9 @@
 import streamlit as st
 
 
-# configuración de la página
-st.set_page_config(
-    page_title="Curso de Streamlit",
-    page_icon=":guardsman:",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
 
 # función para mostrar un mensaje de bienvenida como un H1
-st.title("Bienvenido al curso de Streamlit")
+st.title("Textos")
 
 st.header("¡Hola, soy un header!")
 st.subheader("¡Hola, soy un subheader!")
